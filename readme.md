@@ -1,4 +1,3 @@
-````markdown
 # Detector de Rosto com Recorte em 16:9
 
 Este projeto detecta o rosto de uma pessoa em uma imagem fornecida em **Base64**, faz um recorte expandido para capturar toda a cabeça e ombros e mantém a proporção **16:9**. O resultado é salvo como uma imagem `.jpg`.
@@ -32,6 +31,7 @@ Este projeto detecta o rosto de uma pessoa em uma imagem fornecida em **Base64**
    ```bash
    pip install opencv-python-headless numpy
    ```
+
 ````
 
 ### Passo a Passo
@@ -105,3 +105,4 @@ Este projeto é licenciado sob a [MIT License](https://opensource.org/licenses/M
 ## Autor
 
 Desenvolvido por **Saulo Costa**. 👨‍💻
+````
