@@ -18,11 +18,11 @@ def image_to_base64(img):
     return base64_str
 
 
-def detectar_rosto(imagem_base64):
-    """Detecta o rosto na imagem e retorna o rosto em OpenCV e base64."""
+def desenhar_circulo_no_rosto(imagem_base64):
+    """Desenha um círculo ao redor do rosto detectado na imagem."""
     img = base64_to_image(imagem_base64)
 
-    # Carrega o classificador pré-treinado
+    # Carrega o classificador pré-treinado para detecção de rostos
     face_cascade = cv2.CascadeClassifier(
         cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
@@ -37,48 +37,41 @@ def detectar_rosto(imagem_base64):
     if len(faces) == 0:
         raise Exception("Nenhum rosto encontrado na imagem.")
 
-    # Recorta o primeiro rosto encontrado
-    x, y, w, h = faces[0]
+    # Desenha um círculo ao redor do rosto
+    for (x, y, w, h) in faces:
+        centro_x = x + w // 2
+        centro_y = y + h // 2
+        raio = int((w + h) / 4)  # Raio médio do círculo
+        cv2.circle(img, (centro_x, centro_y), raio,
+                   (0, 255, 0), 2)  # Verde, espessura 2
 
-    # Aumenta a altura em 100%
-    margem_altura = 0.6
-    novo_h = int(h * (1 + margem_altura))
-
-    # Calcula a largura proporcional para manter a proporção 16:9
-    novo_w = int((16 / 9) * novo_h)
-
-    # Reposiciona para o centro do novo recorte
-    novo_x = max(0, x - (novo_w - w) // 2)
-    novo_y = max(0, y - (novo_h - h) // 2)
-
-    # Garante que o recorte não saia das bordas
-    novo_w = min(novo_w, img.shape[1] - novo_x)
-    novo_h = min(novo_h, img.shape[0] - novo_y)
-
-    # Recorte expandido
-    rosto = img[novo_y:novo_y + novo_h, novo_x:novo_x + novo_w]
-
-    # Retorna o rosto como imagem OpenCV e em base64
-    return rosto, image_to_base64(rosto)
+    return img, image_to_base64(img)
 
 
-# Exemplo de uso
+# Função principal para processar múltiplos arquivos
 if __name__ == "__main__":
-    try:
-        # Lê a imagem base64 de um arquivo
-        with open("exemplo_base64.txt", "r") as f:
-            imagem_base64 = f.read()
+    arquivos_base64 = ["base1.txt", "base2.txt", "base3.txt", "base4.txt"]
 
-        # Detecta o rosto e obtém a imagem e base64
-        rosto_img, rosto_base64 = detectar_rosto(imagem_base64)
+    for arquivo in arquivos_base64:
+        try:
+            # Lê a imagem base64 do arquivo
+            with open(arquivo, "r") as f:
+                imagem_base64 = f.read()
 
-        # Salva o rosto em base64 no arquivo .txt
-        with open("rosto_base64.txt", "w") as f:
-            f.write(rosto_base64)
+            # Desenha o círculo no rosto e obtém a imagem e base64
+            imagem_com_circulo, imagem_base64_resultante = desenhar_circulo_no_rosto(
+                imagem_base64)
 
-        # Salva o rosto como uma imagem .jpg
-        cv2.imwrite("rosto.jpg", rosto_img)
+            # Salva a imagem resultante como .jpg
+            nome_imagem_saida = arquivo.replace('.txt', '_com_circulo.jpg')
+            cv2.imwrite(nome_imagem_saida, imagem_com_circulo)
 
-        print("Imagem do rosto salva em 'rosto.jpg' e 'rosto_base64.txt'.")
-    except Exception as e:
-        print(f"Erro: {e}")
+            # Salva a imagem resultante em base64 no arquivo .txt
+            nome_base64_saida = arquivo.replace('.txt', '_base64.txt')
+            with open(nome_base64_saida, "w") as f:
+                f.write(imagem_base64_resultante)
+
+            print(
+                f"Imagem com círculo ao redor do rosto salva como '{nome_imagem_saida}' e '{nome_base64_saida}'.")
+        except Exception as e:
+            print(f"Erro ao processar '{arquivo}': {e}")
