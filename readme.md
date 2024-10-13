@@ -3,6 +3,8 @@
 
 Este projeto detecta o rosto de uma pessoa em uma imagem fornecida em **Base64**, faz um recorte expandido para capturar toda a cabeça e ombros e mantém a proporção **16:9**. O resultado é salvo como uma imagem `.jpg`.
 
+![image](./images/image.png)
+
 ## Funcionalidades
 
 - **Detecção de rosto**: Detecta automaticamente o rosto principal na imagem.
