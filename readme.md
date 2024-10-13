@@ -32,8 +32,6 @@ Este projeto detecta o rosto de uma pessoa em uma imagem fornecida em **Base64**
    pip install opencv-python-headless numpy
    ```
 
-````
-
 ### Passo a Passo
 
 1. Clone este repositório:
@@ -105,4 +103,3 @@ Este projeto é licenciado sob a [MIT License](https://opensource.org/licenses/M
 ## Autor
 
 Desenvolvido por **Saulo Costa**. 👨‍💻
-````
