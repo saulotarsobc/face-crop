@@ -41,7 +41,7 @@ def detectar_rosto(imagem_base64):
     x, y, w, h = faces[0]
 
     # Aumenta a altura em 100%
-    margem_altura = 1
+    margem_altura = 0.6
     novo_h = int(h * (1 + margem_altura))
 
     # Calcula a largura proporcional para manter a proporção 16:9
