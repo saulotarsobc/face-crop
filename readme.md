@@ -75,9 +75,7 @@ Este projeto detecta o rosto de uma pessoa em uma imagem fornecida em **Base64**
 /9j/4AAQSkZJRgABAQEAAAAAAAD/2wCEABALD...
 ```
 
-### Saída (Recorte Expandido em 16:9)
-
-![Rosto Expandido](rosto.jpg)
+> Saída (Recorte Expandido em 16:9)
 
 ---
 
