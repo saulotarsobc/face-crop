@@ -1,3 +1,4 @@
+````markdown
 # Detector de Rosto com Recorte em 16:9
 
 Este projeto detecta o rosto de uma pessoa em uma imagem fornecida em **Base64**, faz um recorte expandido para capturar toda a cabeça e ombros e mantém a proporção **16:9**. O resultado é salvo como uma imagem `.jpg`.
@@ -29,7 +30,6 @@ Este projeto detecta o rosto de uma pessoa em uma imagem fornecida em **Base64**
    ```bash
    pip install opencv-python-headless numpy
    ```
-
 ````
 
 ### Passo a Passo
@@ -49,7 +49,7 @@ Este projeto detecta o rosto de uma pessoa em uma imagem fornecida em **Base64**
    python seu_script.py
    ```
 
-4. O recorte da imagem será salvo como `rosto_expandido_max_16_9.jpg`.
+4. O recorte da imagem será salvo como `rosto.jpg` e a saída em Base64 será salva em `rosto_base64.txt`.
 
 ---
 
@@ -59,7 +59,7 @@ Este projeto detecta o rosto de uma pessoa em uma imagem fornecida em **Base64**
 📁 seu-repositorio/
 │
 ├── exemplo_base64.txt          # Arquivo com a imagem em Base64 de entrada
-├── rosto_expandido_max_16_9.jpg # Saída: imagem recortada em 16:9
+├── rosto.jpg                   # Saída: imagem recortada em 16:9
 ├── rosto_base64.txt            # (Opcional) Saída em Base64 do recorte
 ├── seu_script.py               # Código principal
 └── README.md                   # Documentação do projeto
@@ -77,7 +77,7 @@ Este projeto detecta o rosto de uma pessoa em uma imagem fornecida em **Base64**
 
 ### Saída (Recorte Expandido em 16:9)
 
-![Rosto Expandido](rosto_expandido_max_16_9.jpg)
+![Rosto Expandido](rosto.jpg)
 
 ---
 
@@ -103,19 +103,3 @@ Este projeto é licenciado sob a [MIT License](https://opensource.org/licenses/M
 ## Autor
 
 Desenvolvido por **Saulo Costa**. 👨‍💻
-
-````
-
----
-
-### Como usar
-
-1. Crie um arquivo chamado **`README.md`** no diretório do seu projeto.
-2. Cole o conteúdo acima.
-3. Suba para o GitHub:
-
-```bash
-git add README.md
-git commit -m "Adiciona README.md"
-git push origin main
-```

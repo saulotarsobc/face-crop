@@ -39,7 +39,24 @@ def detectar_rosto(imagem_base64):
 
     # Recorta o primeiro rosto encontrado
     x, y, w, h = faces[0]
-    rosto = img[y:y+h, x:x+w]
+
+    # Aumenta a altura em 100%
+    margem_altura = 1
+    novo_h = int(h * (1 + margem_altura))
+
+    # Calcula a largura proporcional para manter a proporção 16:9
+    novo_w = int((16 / 9) * novo_h)
+
+    # Reposiciona para o centro do novo recorte
+    novo_x = max(0, x - (novo_w - w) // 2)
+    novo_y = max(0, y - (novo_h - h) // 2)
+
+    # Garante que o recorte não saia das bordas
+    novo_w = min(novo_w, img.shape[1] - novo_x)
+    novo_h = min(novo_h, img.shape[0] - novo_y)
+
+    # Recorte expandido
+    rosto = img[novo_y:novo_y + novo_h, novo_x:novo_x + novo_w]
 
     # Retorna o rosto como imagem OpenCV e em base64
     return rosto, image_to_base64(rosto)
